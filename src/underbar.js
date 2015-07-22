@@ -245,8 +245,7 @@
     for (var i=1; i<arguments.length; i++){
       var currentObj=arguments[i]
       for (var prop in currentObj){
-        var currentVal=currentObj[prop];
-        extendedObj[prop]=currentVal;
+        extendedObj[prop]=currentObj[prop];
       }
     }
     return extendedObj;
@@ -255,6 +254,16 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var extendedObj = arguments[0];
+    for (var i=1; i<arguments.length; i++){
+      var currentObj=arguments[i]
+      for (var prop in currentObj){
+        if (extendedObj[prop]==undefined){
+          extendedObj[prop]=currentObj[prop];
+        }
+      }
+    }
+    return extendedObj;
   };
 
 
