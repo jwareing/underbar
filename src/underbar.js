@@ -306,7 +306,16 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+  // Look at _.once as well for this.
   _.memoize = function(func) {
+    var usedArg ={};
+    return function(){
+      var key = Array.prototype.join.call(arguments, " ");
+      if (usedArg[key]===undefined){
+        usedArg[key] = func.apply(this,arguments);
+      }
+      return usedArg[key];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
